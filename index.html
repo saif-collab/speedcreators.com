@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1></h1>
+<p></p>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpeedCreators — The Speedy Blueprint Funnel</title>
+  <meta name="description" content="We plug a done-for-you sales funnel into your coaching business — content, ads, nurture, and DM setters — so your calendar fills with qualified calls." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #080808;
+      --bg2:     #111111;
+      --red:     #C0161C;
+      --red2:    #E01A21;
+      --text:    #f2f2f2;
+      --muted:   #7a7a7a;
+      --border:  #1e1e1e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.6rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+    }
+    /*
+      ─────────────────────────────────────────────────────
+      TO ADD YOUR LOGO IMAGE:
+      Replace the .logo-icon div below with:
+        <img src="logo.png" alt="SpeedCreators" style="height:48px;" />
+      And put your logo.png file in the same folder as index.html
+      ─────────────────────────────────────────────────────
+    */
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .logo-icon svg { width: 100%; height: 100%; }
+    .logo-text {
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #fff;
+      line-height: 1.1;
+    }
+    .logo-text span { color: var(--red); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 5rem 1.5rem 3rem;
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 1.2rem;
+      color: #fff;
+    }
+    h1 .red { color: var(--red); }
+    .subheadline {
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ── VSL ── */
+    .vsl-wrap {
+      width: 100%;
+      max-width: 860px;
+      margin: 3.5rem auto 0;
+      padding: 0 1.5rem;
+    }
+    .vsl-inner {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 */
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 60px rgba(192,22,28,0.15);
+    }
+    .vsl-inner iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ── AUDIT INTRO ── */
+    .audit-intro {
+      text-align: center;
+      padding: 5rem 1.5rem 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .audit-intro h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    .audit-intro h2 .red { color: var(--red); }
+    .audit-intro p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .btn-red {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      padding: 1rem 2.4rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 0 36px rgba(192,22,28,0.4);
+      letter-spacing: -0.2px;
+    }
+    .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
+    .btn-note {
+      display: block;
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--red);
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+
+    /* ── AUDIT WHAT ── */
+    .audit-what {
+      max-width: 700px;
+      margin: 3rem auto 0;
+      padding: 0 1.5rem;
+    }
+    .audit-what .section-label {
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 2.2rem;
+    }
+    .step {
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-start;
+      margin-bottom: 2.2rem;
+      position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 44px;
+      bottom: -2.2rem;
+      width: 1px;
+      background: var(--border);
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.9rem;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+    .step-body { padding-top: 0.55rem; }
+    .step-body h3 {
+      font-size: 1.02rem;
+      font-weight: 800;
+      margin-bottom: 0.3rem;
+      color: #fff;
+    }
+    .step-body p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      text-align: center;
+      padding: 5rem 1.5rem 6rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .final-cta h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    .final-cta h2 .red { color: var(--red); }
+    .final-cta p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+    }
+    footer p {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--red); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      h1 { letter-spacing: -1.5px; }
+      .vsl-wrap { padding: 0 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV / LOGO -->
+<nav>
+  <a href="#" class="logo-wrap">
+    <!-- Speedometer SVG approximation — replace with your actual logo image if preferred -->
+    <div class="logo-icon">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer arc track -->
+        <path d="M15 68 A 38 38 0 1 1 85 68" stroke="#2a2a2a" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <!-- Red zone arc -->
+        <path d="M67 22 A 38 38 0 0 1 85 68" stroke="#C0161C" stroke-width="8" stroke-linecap="round" fill="none"/>
+        <!-- White dashes on top -->
+        <path d="M15 68 A 38 38 0 0 1 50 12" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="6 5" fill="none"/>
+        <!-- Needle -->
+        <line x1="50" y1="50" x2="74" y2="34" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Center dot -->
+        <circle cx="50" cy="50" r="4" fill="#fff"/>
+      </svg>
+    </div>
+    <div class="logo-text">SPEED<br/><span>CREATORS</span></div>
+  </a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>We Build the <span class="red">Funnel.</span><br/>You Close the Calls.</h1>
+  <p class="subheadline">
+    The Speedy Blueprint plugs a complete done-for-you sales system into your coaching or info product business,
+    content, ads, nurture, and DM setters, so qualified calls land on your calendar every single week.
+  </p>
+</div>
+
+<!-- VSL VIDEO -->
+<div class="vsl-wrap">
+  <div class="vsl-inner">
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/TUhv5_LVZ8U?si=NcP6NStLj-wc27Pa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- AUDIT INTRO CTA -->
+<div class="audit-intro">
+  <h2>Want Us to Map Out Your <span class="red">Exact Game Plan</span> For Free?</h2>
+  <p>
+    Book a free 1:1 audit call. We'll look at your business, show you what's missing,
+    and hand you a complete roadmap you can run with or without us.
+  </p>
+  <a href="https://calendly.com/saifsadiq2008/saifscalender" target="_blank" rel="noopener" class="btn-red">
+    Book Your Free 1:1 Audit →
+  </a>
+  <span class="btn-note">30 minutes.</span>
+</div>
+
+<!-- WHAT HAPPENS ON THE AUDIT -->
+<div class="audit-what">
+  <p class="section-label">What Happens on the Call</p>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <h3>We Learn Your Business Inside Out</h3>
+      <p>We ask the right questions, dig into your offer, your audience, your content, and your current funnel, and give you an honest analysis of exactly where you're leaving money on the table.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <h3>We Tell You Exactly What to Fix</h3>
+      <p>No vague advice. We pinpoint the specific gaps in your attention, nurture, and conversion, whether it's your content, your DM follow-up, your ads, or all three.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <h3>We Hand You the Full Game Plan</h3>
+      <p>You leave the call with a complete, step-by-step roadmap. Keep it and implement it yourself, or let us plug it into your business and run it for you. Either way, it's yours.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <div class="divider" style="margin-bottom: 2.5rem;"></div>
+  <h2>Your Calendar Should Be <span class="red">Full.</span><br/>Let's Make That Happen.</h2>
+  <p>
+    One call. A clear plan.Book your free audit below and let's see exactly
+    how we can get consistent, qualified calls coming into your business every week.
+  </p>
+  <a href="https://calendly.com/saifsadiq2008/saifscalender" target="_blank" rel="noopener" class="btn-red">
+    Book Your Free 1:1 Audit →
+  </a>
+  <span class="btn-note">Free. No strings attached. </span>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    <a href="mailto:saifsadiq@speedcreators.com">saifsadiq@speedcreators.com</a>
+    &nbsp;·&nbsp;
+    © 2026 SpeedCreators. All rights reserved.
+  </p>
+</footer>
+
+</body>
+</html>
