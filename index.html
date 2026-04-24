@@ -197,9 +197,7 @@ function Stat({ label, to, suffix, decimals = 0 }) {
   );
 }
 
-import { useState } from 'react';
-
-export default function Vsl() {
+function Vsl() {
   const [hover, setHover] = useState(false);
   const [playing, setPlaying] = useState(false);
 
@@ -249,7 +247,6 @@ export default function Vsl() {
       </div>
     </div>
   );
-}
 }
 
 function AnimatedCta({ children, onClick, note }) {
