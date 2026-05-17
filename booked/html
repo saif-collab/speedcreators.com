@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>You're All Set! 🎉 — SpeedCreators</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Your strategy call is booked. Watch the video below for next steps."/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23C0161C'/%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --sc-red: #C0161C;
+    --sc-red-hover: #E01A21;
+    --sc-orange: #FFA500;
+    --sc-bg: #080808;
+    --sc-bg-2: #111;
+    --sc-bg-3: #0d0d0d;
+    --sc-border: #1e1e1e;
+    --sc-text: #f2f2f2;
+    --sc-muted: #7a7a7a;
+    --sc-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --sc-shadow-cta: 0 0 36px rgba(192,22,28,.40);
+    --sc-shadow-vsl: 0 0 60px rgba(192,22,28,.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sc-font-body); background: var(--sc-bg); color: var(--sc-text); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+  .amb { position: fixed; border-radius: 50%; filter: blur(70px); pointer-events: none; z-index: 0; opacity: .28; }
+  .amb-1 { width: 520px; height: 520px; background: radial-gradient(closest-side, rgba(192,22,28,.55), transparent 70%); top: -180px; left: -120px; animation: drift1 18s ease-in-out infinite alternate; }
+  .amb-2 { width: 620px; height: 620px; background: radial-gradient(closest-side, rgba(192,22,28,.35), transparent 70%); bottom: -220px; right: -160px; animation: drift2 22s ease-in-out infinite alternate; }
+
+  @keyframes drift1 { from { transform: translate(0,0); } to { transform: translate(120px, 80px); } }
+  @keyframes drift2 { from { transform: translate(0,0); } to { transform: translate(-100px,-70px); } }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .55; transform: scale(.85); } }
+
+  body > div#root { position: relative; z-index: 1; }
+
+  @media (max-width: 820px) {
+    .next-steps-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+  }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="amb amb-1"></div>
+<div class="amb amb-2"></div>
+
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react">
+const { useState, useRef, useEffect } = React;
+
+const socialSvgs = {
+  instagram: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z',
+  youtube: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z',
+  linkedin: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z',
+};
+
+function Logo({ size = 48 }) {
+  return (
+    <svg viewBox="0 0 100 100" fill="none" style={{ width: size, height: size }}>
+      <path d="M15 68 A 38 38 0 1 1 85 68" stroke="#2a2a2a" strokeWidth="8" strokeLinecap="round" fill="none"/>
+      <path d="M67 22 A 38 38 0 0 1 85 68" stroke="#C0161C" strokeWidth="8" strokeLinecap="round" fill="none"/>
+      <path d="M15 68 A 38 38 0 0 1 50 12" stroke="#fff" strokeWidth="5" strokeLinecap="round" strokeDasharray="6 5" fill="none"/>
+      <line x1="50" y1="50" x2="74" y2="34" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"/>
+      <circle cx="50" cy="50" r="4" fill="#fff"/>
+    </svg>
+  );
+}
+
+function Nav() {
+  const [logoHover, setLogoHover] = useState(false);
+  return (
+    <div style={{ borderBottom: '1px solid var(--sc-border)' }}>
+      <nav style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'1.4rem 2.5rem', maxWidth:1100, margin:'0 auto' }}>
+        <a href="#" onMouseEnter={() => setLogoHover(true)} onMouseLeave={() => setLogoHover(false)}
+           style={{ display:'flex', alignItems:'center', gap:'0.7rem', textDecoration:'none', transition:'transform .3s cubic-bezier(.2,.8,.2,1)', transform: logoHover ? 'translateX(2px)' : 'none' }}>
+          <div style={{ width:48, height:48, transition:'transform .6s cubic-bezier(.2,.8,.2,1)', transform: logoHover ? 'rotate(12deg)' : 'none' }}><Logo size={48} /></div>
+          <div style={{ fontSize:'1.15rem', fontWeight:900, letterSpacing:'-0.5px', color:'#fff', lineHeight:1.1 }}>
+             SPEED<br/><span style={{ color:'var(--sc-red)' }}>CREATORS</span>
+          </div>
+        </a>
+        <div style={{ display:'flex', alignItems:'center', gap:'1rem' }}>
+          {['instagram','youtube','linkedin'].map(k => (
+            <a key={k} href="#" style={{ color:'var(--sc-muted)', display:'flex', transition:'color .2s, transform .25s cubic-bezier(.2,.8,.2,1)' }}
+               onMouseEnter={e => { e.currentTarget.style.color='#fff'; e.currentTarget.style.transform='translateY(-3px) scale(1.15)'; }}
+               onMouseLeave={e => { e.currentTarget.style.color='var(--sc-muted)'; e.currentTarget.style.transform='none'; }}>
+              <svg viewBox="0 0 24 24" style={{ width:18, height:18, fill:'currentColor' }}><path d={socialSvgs[k]}/></svg>
+            </a>
+          ))}
+        </div>
+      </nav>
+    </div>
+  );
+}
+
+function ThankYouHero() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => { const t = setTimeout(() => setVisible(true), 60); return () => clearTimeout(t); }, []);
+
+  return (
+    <div style={{ padding:'4rem 1.5rem 1.5rem', textAlign:'center', maxWidth:860, margin:'0 auto', position:'relative' }}>
+      <div style={{ position:'inline-flex', display:'inline-flex', alignItems:'center', gap:8, padding:'6px 14px', borderRadius:999, border:'1px solid var(--sc-border)', background:'rgba(255,255,255,.02)', fontSize:11, fontWeight:700, letterSpacing:1.5, textTransform:'uppercase', color:'var(--sc-red)', marginBottom:'1.6rem', opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(8px)', transition:'opacity .6s, transform .6s' }}>
+        <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--sc-orange)', boxShadow:'0 0 10px var(--sc-orange)', animation:'pulse 1.8s ease-in-out infinite' }}/>
+        Booking Confirmed
+      </div>
+      <h1 style={{ fontSize:'clamp(2.2rem, 5.5vw, 3.8rem)', fontWeight:900, lineHeight:1.1, letterSpacing:'-2px', marginBottom:'1.2rem', color:'#fff', opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(14px)', transition:'opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1)' }}>
+        You're All Set! 🎉
+      </h1>
+      <p style={{ fontSize:'clamp(1rem, 2vw, 1.18rem)', color:'var(--sc-muted)', maxWidth:640, margin:'0 auto', lineHeight:1.65, opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(14px)', transition:'opacity .7s ease .15s, transform .7s cubic-bezier(.2,.8,.2,1) .15s' }}>
+        Hey, you have successfully booked your call. Please watch the short message below right now to ensure you prepare correctly for our session.
+      </p>
+    </div>
+  );
+}
+
+function VideoPlayer() {
+  const [hover, setHover] = useState(false);
+  const [playing, setPlaying] = useState(false);
+
+  return (
+    <div style={{ width: '100%', maxWidth: 860, margin: '1.5rem auto 4rem', padding: '0 1.5rem' }}>
+      <div 
+        onMouseEnter={() => setHover(true)} 
+        onMouseLeave={() => setHover(false)} 
+        onClick={() => { if (!playing) setPlaying(true); }}
+        style={{ 
+          position: 'relative', 
+          width: '100%', 
+          paddingTop: '56.25%', 
+          background: '#000', 
+          borderRadius: 12, 
+          overflow: 'hidden', 
+          border: '1px solid var(--sc-border)',
+          boxShadow: hover ? '0 0 90px rgba(192,22,28,0.35), 0 0 30px rgba(192,22,28,0.2)' : 'var(--sc-shadow-vsl)',
+          transform: hover && !playing ? 'translateY(-3px)' : 'none', 
+          transition: 'box-shadow .4s ease, transform .3s cubic-bezier(.2,.8,.2,1)', 
+          cursor: playing ? 'default' : 'pointer' 
+        }}
+      >
+        {!playing ? (
+          <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--sc-muted)', fontSize: 13, gap: 12, flexDirection: 'column' }}>
+            <div style={{ 
+              width: 72, height: 72, borderRadius: '50%', background: 'var(--sc-red)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transform: hover ? 'scale(1.12)' : 'scale(1)', transition: 'transform .3s cubic-bezier(.2,.8,.2,1)',
+              boxShadow: hover ? '0 0 40px rgba(192,22,28,.8)' : '0 0 20px rgba(192,22,28,.5)' 
+            }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div style={{ fontWeight: 600, letterSpacing: '0.5px', color: '#fff' }}>Click to Play Next Steps Message</div>
+          </div>
+        ) : (
+          /* Replace source with YouTube embed link, Vimeo link, or raw Video file URLs */
+          <iframe 
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+            src="https://www.youtube.com/embed/TUhv5_LVZ8U?autoplay=1" 
+            title="Next Steps Breakdown" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowFullScreen
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
+function NextStepsInstructions() {
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const [screenshotHover, setScreenshotHover] = useState(false);
+
+  return (
+    <div style={{ borderTop:'1px solid var(--sc-border)', background:'var(--sc-bg-3)', padding:'5rem 1.5rem' }}>
+      <div className="next-steps-grid" style={{ maxWidth:1050, margin:'0 auto', display:'grid', gridTemplateColumns:'1fr 450px', gap:'4rem', alignItems:'start' }}>
+        
+        {/* Left Side Copy Instructions */}
+        <div>
+          <p style={{ fontSize:'0.72rem', fontWeight:700, letterSpacing:'2.5px', textTransform:'uppercase', color:'var(--sc-red)', marginBottom:'0.6rem' }}>Process</p>
+          <h2 style={{ fontSize:'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight:900, letterSpacing:'-1.5px', lineHeight:1.15, marginBottom:'2.5rem', color:'#fff' }}>
+            What Happens <span style={{ color:'var(--sc-orange)' }}>Next?</span>
+          </h2>
+
+          {/* Step 1 */}
+          <div onMouseEnter={() => setHoveredCard(1)} onMouseLeave={() => setHoveredCard(null)}
+               style={{ display:'flex', gap:'1.2rem', marginBottom:'2rem', transition:'transform .3s', transform: hoveredCard === 1 ? 'translateX(4px)' : 'none' }}>
+            <div style={{ flexShrink:0, width:36, height:36, background: hoveredCard === 1 ? 'var(--sc-red)' : 'var(--sc-bg-2)', border:'1px solid var(--sc-border)', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:800, fontSize:'0.85rem', color:'#fff', transition:'all .3s' }}>1</div>
+            <div>
+              <h3 style={{ fontSize:'1.1rem', fontWeight:800, marginBottom:'0.3rem', color: hoveredCard === 1 ? 'var(--sc-red)' : '#fff', transition:'color .3s' }}>Check Your Email</h3>
+              <p style={{ fontSize:'0.92rem', color:'var(--sc-muted)', lineHeight:1.65 }}>You'll receive a confirmation email shortly containing all your access details, links, and timing data.</p>
+            </div>
+          </div>
+
+          {/* Step 2 */}
+          <div onMouseEnter={() => setHoveredCard(2)} onMouseLeave={() => setHoveredCard(null)}
+               style={{ display:'flex', gap:'1.2rem', marginBottom:'2rem', transition:'transform .3s', transform: hoveredCard === 2 ? 'translateX(4px)' : 'none' }}>
+            <div style={{ flexShrink:0, width:36, height:36, background: hoveredCard === 2 ? 'var(--sc-red)' : 'var(--sc-bg-2)', border:'1px solid var(--sc-border)', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:800, fontSize:'0.85rem', color:'#fff', transition:'all .3s' }}>2</div>
+            <div>
+              <h3 style={{ fontSize:'1.1rem', fontWeight:800, marginBottom:'0.3rem', color: hoveredCard === 2 ? 'var(--sc-red)' : '#fff', transition:'color .3s' }}>Add to Calendar</h3>
+              <p style={{ fontSize:'0.92rem', color:'var(--sc-muted)', lineHeight:1.65 }}>Go to your email right now, find the calendar event invite, and click <strong style={{ color:'#fff' }}>"Yes"</strong> to accept it. This locks it perfectly onto your schedule so you don't miss our dynamic session.</p>
+            </div>
+          </div>
+
+          {/* Step 3 */}
+          <div onMouseEnter={() => setHoveredCard(3)} onMouseLeave={() => setHoveredCard(null)}
+               style={{ display:'flex', gap:'1.2rem', transition:'transform .3s', transform: hoveredCard === 3 ? 'translateX(4px)' : 'none' }}>
+            <div style={{ flexShrink:0, width:36, height:36, background: hoveredCard === 3 ? 'var(--sc-red)' : 'var(--sc-bg-2)', border:'1px solid var(--sc-border)', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:800, fontSize:'0.85rem', color:'#fff', transition:'all .3s' }}>3</div>
+            <div>
+              <h3 style={{ fontSize:'1.1rem', fontWeight:800, marginBottom:'0.3rem', color: hoveredCard === 3 ? 'var(--sc-red)' : '#fff', transition:'color .3s' }}>Prep</h3>
+              <p style={{ fontSize:'0.92rem', color:'var(--sc-muted)', lineHeight:1.65 }}>Have your structural business questions or metric notes ready so we can slash fluff and extract maximum growth value during our call.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Side Image Showcase (Your attached design sample style) */}
+        <div onMouseEnter={() => setScreenshotHover(true)} onMouseLeave={() => setScreenshotHover(false)}
+             style={{ position:'relative', marginTop:'1.5rem' }}>
+          <div style={{ position:'absolute', inset:-12, borderRadius:16, background:'radial-gradient(closest-side, rgba(192,22,28,.35), transparent 70%)', opacity: screenshotHover ? 1 : 0, transition:'opacity .5s' }}/>
+          
+          {/* Inner containment matching original picture structure with clean white offset border framing */}
+          <div style={{ 
+            position:'relative', 
+            background:'#ffffff', 
+            borderRadius:12, 
+            padding:'14px', 
+            border:'1px solid var(--sc-border)',
+            transform: screenshotHover ? 'translateY(-4px)' : 'none',
+            boxShadow: screenshotHover ? '0 30px 60px rgba(0,0,0,.6)' : '0 10px 30px rgba(0,0,0,.4)',
+            transition:'transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s'
+          }}>
+            <img src="Screenshot 2026-05-17 at 8.22.00 PM.png" alt="Make sure to click Yes" 
+                 style={{ width:'100%', height:'auto', display:'block', borderRadius:6 }} 
+                 onError={(e) => {
+                   // Fallback graphic visualization if image filename changes locally
+                   e.target.style.display = 'none';
+                   e.target.parentNode.innerHTML = `<div style="padding:40px; text-align:center; color:#333; font-weight:700;">[ Calendar Screenshot Placeholder: Click "Yes" ]</div>`;
+                 }}
+            />
+          </div>
+          <span style={{ display:'block', textAlign:'center', marginTop:'1rem', fontSize:'0.8rem', color:'var(--sc-muted)', fontWeight:500 }}>
+            Make sure to check your inbox and click "Yes"
+          </span>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+function OutroMessage() {
+  return (
+    <div style={{ textAlign:'center', padding:'5rem 1.5rem 6rem', maxWidth:700, margin:'0 auto' }}>
+      <h2 style={{ fontSize:'clamp(1.7rem, 3.5vw, 2.6rem)', fontWeight:900, letterSpacing:'-1.5px', lineHeight:1.2, marginBottom:'1rem', color:'#fff' }}>
+        We look forward to speaking with you!
+      </h2>
+      <div style={{ width: 60, height: 3, background: 'var(--sc-red)', margin: '2rem auto 0', borderRadius: 2 }}/>
+    </div>
+  );
+}
+
+function Footer() {
+  return (
+    <footer style={{ borderTop:'1px solid var(--sc-border)', padding:'1.8rem 1.5rem', textAlign:'center' }}>
+      <p style={{ fontSize:'0.76rem', color:'var(--sc-muted)' }}>
+        <a href="mailto:saifsadiq@speedcreators.com" style={{ color:'var(--sc-muted)', textDecoration:'none' }}>saifsadiq@speedcreators.com</a>
+        &nbsp;·&nbsp; © 2026 SpeedCreators. All rights reserved.
+      </p>
+    </footer>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Nav/>
+      <ThankYouHero/>
+      <VideoPlayer/>
+      <NextStepsInstructions/>
+      <OutroMessage/>
+      <Footer/>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
