@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Welcome to Speed Creators! 🚀 — SpeedCreators</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Welcome to Speed Creators. Watch the video below for your onboarding next steps."/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23C0161C'/%3E%3C/svg%3E"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --sc-red: #C0161C;
+    --sc-red-hover: #E01A21;
+    --sc-orange: #FFA500;
+    --sc-bg: #080808;
+    --sc-bg-2: #111;
+    --sc-bg-3: #0d0d0d;
+    --sc-border: #1e1e1e;
+    --sc-text: #f2f2f2;
+    --sc-muted: #7a7a7a;
+    --sc-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --sc-shadow-cta: 0 0 36px rgba(192,22,28,.40);
+    --sc-shadow-vsl: 0 0 60px rgba(192,22,28,.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sc-font-body); background: var(--sc-bg); color: var(--sc-text); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+  .amb { position: fixed; border-radius: 50%; filter: blur(70px); pointer-events: none; z-index: 0; opacity: .28; }
+  .amb-1 { width: 520px; height: 520px; background: radial-gradient(closest-side, rgba(192,22,28,.55), transparent 70%); top: -180px; left: -120px; animation: drift1 18s ease-in-out infinite alternate; }
+  .amb-2 { width: 620px; height: 620px; background: radial-gradient(closest-side, rgba(192,22,28,.35), transparent 70%); bottom: -220px; right: -160px; animation: drift2 22s ease-in-out infinite alternate; }
+
+  @keyframes drift1 { from { transform: translate(0,0); } to { transform: translate(120px, 80px); } }
+  @keyframes drift2 { from { transform: translate(0,0); } to { transform: translate(-100px,-70px); } }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .55; transform: scale(.85); } }
+
+  body > div#root { position: relative; z-index: 1; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="amb amb-1"></div>
+<div class="amb amb-2"></div>
+
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react">
+const { useState, useEffect } = React;
+
+function Logo({ size = 48 }) {
+  return (
+    <svg viewBox="0 0 100 100" fill="none" style={{ width: size, height: size }}>
+      <path d="M15 68 A 38 38 0 1 1 85 68" stroke="#2a2a2a" strokeWidth="8" strokeLinecap="round" fill="none"/>
+      <path d="M67 22 A 38 38 0 0 1 85 68" stroke="#C0161C" strokeWidth="8" strokeLinecap="round" fill="none"/>
+      <path d="M15 68 A 38 38 0 0 1 50 12" stroke="#fff" strokeWidth="5" strokeLinecap="round" strokeDasharray="6 5" fill="none"/>
+      <line x1="50" y1="50" x2="74" y2="34" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"/>
+      <circle cx="50" cy="50" r="4" fill="#fff"/>
+    </svg>
+  );
+}
+
+function Nav() {
+  const [logoHover, setLogoHover] = useState(false);
+  return (
+    <div style={{ borderBottom: '1px solid var(--sc-border)' }}>
+      <nav style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'1.4rem 2.5rem', maxWidth:1100, margin:'0 auto' }}>
+        <a href="#" onMouseEnter={() => setLogoHover(true)} onMouseLeave={() => setLogoHover(false)}
+           style={{ display:'flex', alignItems:'center', gap:'0.7rem', textDecoration:'none', transition:'transform .3s cubic-bezier(.2,.8,.2,1)', transform: logoHover ? 'translateX(2px)' : 'none' }}>
+          <div style={{ width:48, height:48, transition:'transform .6s cubic-bezier(.2,.8,.2,1)', transform: logoHover ? 'rotate(12deg)' : 'none' }}><Logo size={48} /></div>
+          <div style={{ fontSize:'1.15rem', fontWeight:900, letterSpacing:'-0.5px', color:'#fff', lineHeight:1.1 }}>
+             SPEED<br/><span style={{ color:'var(--sc-red)' }}>CREATORS</span>
+          </div>
+        </a>
+      </nav>
+    </div>
+  );
+}
+
+function OnboardingHero() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => { const t = setTimeout(() => setVisible(true), 60); return () => clearTimeout(t); }, []);
+
+  return (
+    <div style={{ padding:'4rem 1.5rem 1.5rem', textAlign:'center', maxWidth:860, margin:'0 auto', position:'relative' }}>
+      <div style={{ position:'inline-flex', display:'inline-flex', alignItems:'center', gap:8, padding:'6px 14px', borderRadius:999, border:'1px solid var(--sc-border)', background:'rgba(255,255,255,.02)', fontSize:11, fontWeight:700, letterSpacing:1.5, textTransform:'uppercase', color:'var(--sc-red)', marginBottom:'1.6rem', opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(8px)', transition:'opacity .6s, transform .6s' }}>
+        <span style={{ width:6, height:6, borderRadius:'50%', background:'var(--sc-orange)', boxShadow:'0 0 10px var(--sc-orange)', animation:'pulse 1.8s ease-in-out infinite' }}/>
+        Onboarding Active
+      </div>
+      <h1 style={{ fontSize:'clamp(2.2rem, 5.5vw, 3.8rem)', fontWeight:900, lineHeight:1.1, letterSpacing:'-2px', marginBottom:'1.2rem', color:'#fff', opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(14px)', transition:'opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1)' }}>
+        Welcome to Speed Creators
+      </h1>
+      <p style={{ fontSize:'clamp(1rem, 2vw, 1.18rem)', color:'var(--sc-muted)', maxWidth:640, margin:'0 auto', lineHeight:1.65, opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(14px)', transition:'opacity .7s ease .15s, transform .7s cubic-bezier(.2,.8,.2,1) .15s' }}>
+        Watch the quick message below before our strategy call.
+      </p>
+    </div>
+  );
+}
+
+function VideoPlayer() {
+  const [hover, setHover] = useState(false);
+
+  return (
+    <div style={{ width: '100%', maxWidth: 860, margin: '1.5rem auto 3rem', padding: '0 1.5rem' }}>
+      <div 
+        onMouseEnter={() => setHover(true)} 
+        onMouseLeave={() => setHover(false)} 
+        style={{ 
+          position: 'relative', 
+          width: '100%', 
+          paddingTop: '56.25%', 
+          background: '#000', 
+          borderRadius: 12, 
+          overflow: 'hidden', 
+          border: '1px solid var(--sc-border)',
+          boxShadow: hover ? '0 0 90px rgba(192,22,28,0.35), 0 0 30px rgba(192,22,28,0.2)' : 'var(--sc-shadow-vsl)',
+          transform: hover ? 'translateY(-3px)' : 'none', 
+          transition: 'box-shadow .4s ease, transform .3s cubic-bezier(.2,.8,.2,1)'
+        }}
+      >
+        {/* ========================================================================= */}
+        {/* 🚨 PASTE YOUR VIDEO EMBED LINK IN THE 'src' BELOW 🚨                       */}
+        {/*                                                                           */}
+        {/* - YouTube Unlisted: https://www.youtube.com/embed/YOUR_VIDEO_ID           */}
+        {/* - Loom: https://www.loom.com/embed/YOUR_LOOM_ID                          */}
+        {/* - Vimeo: https://player.vimeo.com/video/YOUR_VIDEO_ID                     */}
+        {/* ========================================================================= */}
+        <iframe 
+          src="YOUR_VIDEO_EMBED_URL_HERE" 
+          title="Speed Creators Onboarding Video"
+          frameBorder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowFullScreen 
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function NextStepsInstructions() {
+  return (
+    <div style={{ borderTop:'1px solid var(--sc-border)', background:'var(--sc-bg-3)', padding:'4.5rem 1.5rem' }}>
+      <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
+        <p style={{ fontSize:'0.72rem', fontWeight:700, letterSpacing:'2.5px', textTransform:'uppercase', color:'var(--sc-red)', marginBottom:'0.6rem' }}>Process</p>
+        <h2 style={{ fontSize:'clamp(1.8rem, 3.5vw, 2.4rem)', fontWeight:900, letterSpacing:'-1.5px', lineHeight:1.15, marginBottom:'2rem', color:'#fff' }}>
+          What Happens <span style={{ color:'var(--sc-orange)' }}>Next?</span>
+        </h2>
+
+        <div style={{ 
+          background: 'var(--sc-bg-2)', 
+          border: '1px solid var(--sc-border)', 
+          borderRadius: 12, 
+          padding: '2.5rem 2rem', 
+          textAlign: 'center',
+          boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
+        }}>
+          <p style={{ fontSize: 'clamp(1.05rem, 2vw, 1.25rem)', color: '#fff', lineHeight: 1.7, fontWeight: 500 }}>
+            Your next steps have already been sent in the Slack channel. Please check that out before our strategy call. We will catch you on the strategy call, and we are happy to have you here. Let's scale.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Footer() {
+  return (
+    <footer style={{ borderTop:'1px solid var(--sc-border)', padding:'1.8rem 1.5rem', textAlign:'center' }}>
+      <p style={{ fontSize:'0.76rem', color:'var(--sc-muted)' }}>
+        <a href="mailto:saifsadiq@speedcreators.com" style={{ color:'var(--sc-muted)', textDecoration:'none' }}>saifsadiq@speedcreators.com</a>
+        &nbsp;·&nbsp; © 2026 SpeedCreators. All rights reserved.
+      </p>
+    </footer>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Nav/>
+      <OnboardingHero/>
+      <VideoPlayer/>
+      <NextStepsInstructions/>
+      <Footer/>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
